@@ -8,7 +8,7 @@ scope = [
     "https://spreadsheets.google.com/feeds",
     "https://www.googleapis.com/auth/drive"
 ]
-creds_dict = json.loads(json.dumps(st.secrets["gcp_service_account"]))
+creds_dict = dict(st.secrets["gcp_service_account"])
 credentials = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 gc = gspread.authorize(credentials)
 sheet = gc.open("MCQ_Quiz_Results").sheet1  # Replace with your sheet name
