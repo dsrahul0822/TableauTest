@@ -9,21 +9,11 @@ st.set_page_config(page_title="The Scholar Quiz", layout="wide")
 
 # ---- Logo ----
 st.markdown("""
-    <style>
-        .logo-container {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-        .logo-img {
-            height: 60px;
-        }
-    </style>
-    <div class="logo-container">
-        <img src="<img src="https://raw.githubusercontent.com/dsrahul0822/TableauTest/main/The-Scholar.png">
-" class="logo-img">
+    <div style='position: absolute; top: 10px; left: 10px;'>
+        <img src="https://raw.githubusercontent.com/dsrahul0822/TableauTest/main/The-Scholar.png" style="height:60px;">
     </div>
 """, unsafe_allow_html=True)
+
 
 st.title("🧠 The Scholar - MCQ Quiz App")
 
