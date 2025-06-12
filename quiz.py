@@ -20,7 +20,8 @@ st.markdown("""
         }
     </style>
     <div class="logo-container">
-        <img src="https://github.com/dsrahul0822/TableauTest/blob/main/The-Scholar.png" class="logo-img">
+        <img src="<img src="https://raw.githubusercontent.com/dsrahul0822/TableauTest/main/The-Scholar.png">
+" class="logo-img">
     </div>
 """, unsafe_allow_html=True)
 
