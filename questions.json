@@ -1,32 +1,72 @@
 [
   {
-    "question": "What does CPU stand for?",
-    "options": ["Central Processing Unit", "Computer Processing Unit", "Central Performance Unit", "Control Program Utility"],
-    "answer": "Central Processing Unit",
-    "explanation": "CPU stands for Central Processing Unit, the brain of the computer."
+    "question": "What is Tableau primarily used for?",
+    "options": ["Web development", "Game development", "Data visualization", "Operating systems"],
+    "answer": "Data visualization",
+    "explanation": "Tableau is a leading platform for data visualization and business intelligence."
   },
   {
-    "question": "Which data type is used to store decimal numbers in Python?",
-    "options": ["int", "float", "str", "bool"],
-    "answer": "float",
-    "explanation": "The 'float' data type is used for decimal or floating point numbers."
+    "question": "Which file extension is used for Tableau packaged workbooks?",
+    "options": [".twb", ".twbx", ".tb", ".tde"],
+    "answer": ".twbx",
+    "explanation": ".twbx files are Tableau packaged workbooks that include the workbook and data sources."
   },
   {
-    "question": "Which library is commonly used for data visualization in Python?",
-    "options": ["pandas", "matplotlib", "numpy", "os"],
-    "answer": "matplotlib",
-    "explanation": "Matplotlib is a popular data visualization library in Python."
+    "question": "What is a 'dashboard' in Tableau?",
+    "options": [
+      "A summary of system logs",
+      "A place to write SQL queries",
+      "A collection of multiple visualizations on a single screen",
+      "A plugin for Excel"
+    ],
+    "answer": "A collection of multiple visualizations on a single screen",
+    "explanation": "A dashboard in Tableau allows you to combine multiple views and objects into a single page."
   },
   {
-    "question": "Which of the following is a machine learning algorithm?",
-    "options": ["Linear Regression", "HTML", "TCP/IP", "SMTP"],
-    "answer": "Linear Regression",
-    "explanation": "Linear Regression is a common algorithm used in machine learning."
+    "question": "Which of the following is NOT a type of join in Tableau?",
+    "options": ["Inner", "Outer", "Left", "Diagonal"],
+    "answer": "Diagonal",
+    "explanation": "Tableau supports Inner, Left, Right, and Outer joins, but not Diagonal joins."
   },
   {
-    "question": "What is the file extension for Python files?",
-    "options": [".java", ".txt", ".py", ".html"],
-    "answer": ".py",
-    "explanation": "Python files use the .py extension."
+    "question": "Which feature in Tableau allows grouping of similar data?",
+    "options": ["Sets", "Bins", "Groups", "Filters"],
+    "answer": "Groups",
+    "explanation": "Groups in Tableau allow users to combine similar dimension members into one."
+  },
+  {
+    "question": "Which of these is used to create calculated fields in Tableau?",
+    "options": ["SQL syntax", "Custom SQL", "Tableau formulas", "Python code"],
+    "answer": "Tableau formulas",
+    "explanation": "Calculated fields in Tableau are created using its own formula syntax."
+  },
+  {
+    "question": "What does a blue pill represent in Tableau?",
+    "options": ["Discrete field", "Continuous field", "Dimension", "String field"],
+    "answer": "Discrete field",
+    "explanation": "A blue pill indicates a discrete field, while green indicates a continuous field."
+  },
+  {
+    "question": "Which of the following is a Tableau data type?",
+    "options": ["Boolean", "Decimal", "Float", "Record"],
+    "answer": "Boolean",
+    "explanation": "Tableau supports Boolean along with other data types like Integer, String, Date, etc."
+  },
+  {
+    "question": "What is the use of 'Show Me' in Tableau?",
+    "options": [
+      "To open dashboards",
+      "To connect to databases",
+      "To suggest suitable visualizations",
+      "To format worksheets"
+    ],
+    "answer": "To suggest suitable visualizations",
+    "explanation": "'Show Me' helps users by suggesting the best visualization types based on selected data."
+  },
+  {
+    "question": "Which feature allows periodic data refresh in Tableau Server?",
+    "options": ["Live connection", "Extracts", "Data blending", "Scheduled refresh"],
+    "answer": "Scheduled refresh",
+    "explanation": "Scheduled refresh ensures data extracts are updated automatically at defined intervals."
   }
 ]
