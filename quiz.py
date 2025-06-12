@@ -3,6 +3,8 @@ import json
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import datetime
+from pytz import timezone
+
 
 # ---- Setup ----
 st.set_page_config(page_title="The Scholar Quiz", layout="wide")
@@ -80,7 +82,9 @@ if st.session_state.submitted:
     client = gspread.authorize(credentials)
     sheet = client.open("MCQ_Quiz_Results").sheet1
 
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    india = timezone('Asia/Kolkata')
+    timestamp = datetime.datetime.now(india).strftime("%Y-%m-%d %H:%M:%S")
     row = [timestamp, st.session_state.name, st.session_state.batch, score, len(questions)]
     sheet.append_row(row)
 
