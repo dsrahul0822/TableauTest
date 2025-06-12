@@ -82,7 +82,7 @@ if submitted:
     creds_dict = dict(st.secrets["gcp_service_account"])
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
     client = gspread.authorize(credentials)
-    sheet = client.open("Scholar_Quiz_Responses").sheet1
+    sheet = client.open("MCQ_Quiz_Results").sheet1
 
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     row = [now, name, batch, score, len(questions)] + [res["selected"] for res in result_details]
