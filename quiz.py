@@ -69,7 +69,7 @@ if submitted:
 
     # ---- Display question-wise result ----
     for i, res in enumerate(result_details, start=1):
-        st.write(f"**Q{i}: {res['question']}**")
+        st.markdown(f"**Q{i}: {res['question']}**")
         st.write(f"✅ Correct Answer: {res['correct']}")
         if res['is_correct']:
             st.markdown(f"<span style='color:green'>✔ You selected: {res['selected']}</span>", unsafe_allow_html=True)
