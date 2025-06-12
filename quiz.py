@@ -85,7 +85,7 @@ if submitted:
     sheet = client.open("MCQ_Quiz_Results").sheet1
 
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    row = [now, name, batch, score, len(questions)] + [res["selected"] for res in result_details]
+    row = [now, name, batch, score, len(questions)]
     sheet.append_row(row)
 
     st.success("✅ Your responses have been recorded successfully!")
