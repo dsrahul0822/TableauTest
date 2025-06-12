@@ -30,7 +30,7 @@ if not st.session_state.started:
 
 # ---- Quiz Form ----
 if st.session_state.started and not st.session_state.submitted:
-    with open("questions.json", "r") as f:
+    with open("Practical_Sample_Questions.json", "r") as f:
         questions = json.load(f)
 
     with st.form("quiz_form"):
