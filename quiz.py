@@ -68,8 +68,8 @@ if submitted:
     st.success(f"🎉 {name}, you scored {score} out of {len(questions)}!")
 
     # ---- Display question-wise result ----
-    for res in result_details:
-        st.write(f"**Q: {res['question']}**")
+    for i, res in enumerate(result_details, start=1):
+        st.write(f"**Q{i}: {res['question']}**")
         st.write(f"✅ Correct Answer: {res['correct']}")
         if res['is_correct']:
             st.markdown(f"<span style='color:green'>✔ You selected: {res['selected']}</span>", unsafe_allow_html=True)
