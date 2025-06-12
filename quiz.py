@@ -7,13 +7,6 @@ import datetime
 # ---- Setup ----
 st.set_page_config(page_title="The Scholar Quiz", layout="wide")
 
-# ---- Logo ----
-st.markdown("""
-    <div style='position: absolute; top: 10px; left: 10px;'>
-        <img src="https://raw.githubusercontent.com/dsrahul0822/TableauTest/main/The-Scholar.png" style="height:60px;">
-    </div>
-""", unsafe_allow_html=True)
-
 st.title("🧠 The Scholar - MCQ Quiz App")
 
 # ---- Input Form ----
@@ -85,7 +78,7 @@ if st.session_state.submitted:
     creds_dict = dict(st.secrets["gcp_service_account"])
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
     client = gspread.authorize(credentials)
-    sheet = client.open("Scholar_Quiz_Responses").sheet1
+    sheet = client.open("MCQ_Quiz_Results").sheet1
 
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     row = [timestamp, st.session_state.name, st.session_state.batch, score, len(questions)]
