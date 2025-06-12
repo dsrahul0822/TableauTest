@@ -2,65 +2,90 @@ import streamlit as st
 import json
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import datetime
 
-# ---------------- Setup Google Sheets ------------------
-scope = [
-    "https://spreadsheets.google.com/feeds",
-    "https://www.googleapis.com/auth/drive"
-]
-creds_dict = dict(st.secrets["gcp_service_account"])
-credentials = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
-gc = gspread.authorize(credentials)
-sheet = gc.open("MCQ_Quiz_Results").sheet1  # Replace with your sheet name
+# ---- Setup page ----
+st.set_page_config(page_title="The Scholar Quiz", layout="wide")
 
-# ---------------- Load Questions ------------------
+# ---- Logo ----
+st.markdown("""
+    <style>
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .logo-img {
+            height: 60px;
+        }
+    </style>
+    <div class="logo-container">
+        <img src="https://github.com/dsrahul0822/TableauTest/blob/main/The-Scholar.png" class="logo-img">
+    </div>
+""", unsafe_allow_html=True)
+
+st.title("🧠 The Scholar - MCQ Quiz App")
+
+# ---- Learner Info ----
+name = st.text_input("Enter your name")
+batch = st.selectbox("Select your batch", ["DS14", "DS13", "DS12", "DS11"])
+
+if not name:
+    st.warning("Please enter your name to begin the quiz.")
+    st.stop()
+
+# ---- Load Questions ----
 with open("questions.json", "r") as f:
     questions = json.load(f)
 
-# ---------------- UI ------------------
-st.markdown(
-    """
-    <div style='display: flex; align-items: center;'>
-        <img src='https://i.ibb.co/jRCkDGR/logo.png' style='height: 60px; margin-right: auto;' />
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-st.title("📝 Data Analytics Quiz")
-st.markdown("---")
-
-# ---------------- Learner Info ------------------
-name = st.text_input("Enter your name:")
-batch = st.selectbox("Select your batch:", ["DS13", "DS14", "DS15"])
-
-# ---------------- Quiz ------------------
-if name and batch:
-    st.markdown("### Quiz Questions")
+# ---- Form to handle quiz ----
+with st.form("quiz_form"):
+    st.subheader("📋 Multiple Choice Questions")
     user_answers = {}
-    score = 0
-
     for i, q in enumerate(questions):
-        st.markdown(f"**Q{i+1}: {q['question']}**")
-        options = q['options']
-        selected = st.radio("Choose an option:", options, key=f"q{i}", index=0)
-        user_answers[q['question']] = selected
+        st.write(f"**Q{i+1}: {q['question']}**")
+        user_answers[i] = st.radio("Choose an option:", q["options"], key=f"q{i}")
+        st.markdown("---")
+    submitted = st.form_submit_button("Submit Quiz")
 
-        correct = q['answer']
-        if selected == correct:
+# ---- Process Submission ----
+if submitted:
+    score = 0
+    result_details = []
+    for i, q in enumerate(questions):
+        user_ans = user_answers.get(i)
+        correct_ans = q["answer"]
+        is_correct = user_ans == correct_ans
+        result_details.append({
+            "question": q["question"],
+            "selected": user_ans,
+            "correct": correct_ans,
+            "is_correct": is_correct
+        })
+        if is_correct:
             score += 1
-            st.success(f"✅ Your answer: {selected}")
+
+    st.success(f"🎉 {name}, you scored {score} out of {len(questions)}!")
+
+    # ---- Display question-wise result ----
+    for res in result_details:
+        st.write(f"**Q: {res['question']}**")
+        st.write(f"✅ Correct Answer: {res['correct']}")
+        if res['is_correct']:
+            st.markdown(f"<span style='color:green'>✔ You selected: {res['selected']}</span>", unsafe_allow_html=True)
         else:
-            st.error(f"❌ Your answer: {selected}")
-            st.info(f"✅ Correct answer: {correct}")
+            st.markdown(f"<span style='color:red'>✘ You selected: {res['selected']}</span>", unsafe_allow_html=True)
         st.markdown("---")
 
-    # ---------------- Final Score ------------------
-    st.subheader(f"🏁 Final Score: {score} / {len(questions)}")
+    # ---- Save result to Google Sheet ----
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    creds_dict = dict(st.secrets["gcp_service_account"])
+    credentials = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+    client = gspread.authorize(credentials)
+    sheet = client.open("Scholar_Quiz_Responses").sheet1
 
-    if st.button("📤 Submit and Save Result"):
-        sheet.append_row([name, batch, score])
-        st.success("✅ Result submitted to Google Sheet!")
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    row = [now, name, batch, score, len(questions)] + [res["selected"] for res in result_details]
+    sheet.append_row(row)
 
-else:
-    st.warning("Please enter your name and select a batch to begin.")
+    st.success("✅ Your responses have been recorded successfully!")
