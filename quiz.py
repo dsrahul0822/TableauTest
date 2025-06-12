@@ -7,13 +7,6 @@ import datetime
 # ---- Setup page ----
 st.set_page_config(page_title="The Scholar Quiz", layout="wide")
 
-# ---- Logo ----
-st.markdown("""
-    <div style='position: absolute; top: 10px; left: 10px;'>
-        <img src="https://raw.githubusercontent.com/dsrahul0822/TableauTest/main/The-Scholar.png" style="height:100px;">
-    </div>
-""", unsafe_allow_html=True)
-
 
 st.title("🧠 The Scholar - MCQ Quiz App")
 
